@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  section.bg-light
+    .container
+      .row.my-2
+        table.table.table-bordered
+          thead.thead-dark.text-center
+            tr
+              th(scope='col') FullName
+              th(scope='col') userName
+              th(scope='col') Email
+              th(scope='col') Role
+          tbody
+            each user in users
+              tr
+                td= user.fullName
+                td= user.userName
+                td= user.email
+                td= user.iam_role

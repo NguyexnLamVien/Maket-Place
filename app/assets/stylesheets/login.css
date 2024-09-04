@@ -1,0 +1,132 @@
+<<<<<<< HEAD
+/* Made with love by Mutiullah Samim*/
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,
+body {
+  background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  font-family: 'Numans', sans-serif;
+=======
+@import url("https://fonts.googleapis.com/css?family=Numans");
+
+html,
+body {
+  background-image: url("http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  font-family: "Numans", sans-serif;
+>>>>>>> 3942edc5bc195fd83c21caf2d374a6c7c104c8fb
+}
+
+.container {
+  height: 100%;
+  align-content: center;
+}
+
+.card {
+  height: 370px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.social_icon span {
+  font-size: 60px;
+  margin-left: 10px;
+<<<<<<< HEAD
+  color: #FFC312;
+=======
+  color: #ffc312;
+>>>>>>> 3942edc5bc195fd83c21caf2d374a6c7c104c8fb
+}
+
+.social_icon span:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.card-header h3 {
+  color: white;
+}
+
+.social_icon {
+  position: absolute;
+  right: 20px;
+  top: -45px;
+}
+
+.input-group-prepend span {
+  width: 50px;
+<<<<<<< HEAD
+  background-color: #FFC312;
+=======
+  background-color: #ffc312;
+>>>>>>> 3942edc5bc195fd83c21caf2d374a6c7c104c8fb
+  color: black;
+  border: 0 !important;
+}
+
+<<<<<<< HEAD
+input:focus {
+  outline: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
+
+=======
+.input-group-prepend .input-group-text {
+  height: 100%;
+  justify-content: center;
+  border-radius: 5px 0 0 5px;
+}
+
+input:focus {
+  outline: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
+>>>>>>> 3942edc5bc195fd83c21caf2d374a6c7c104c8fb
+}
+
+.remember {
+  color: white;
+}
+
+.remember input {
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+  margin-right: 5px;
+}
+
+.login_btn {
+  color: black;
+<<<<<<< HEAD
+  background-color: #FFC312;
+=======
+  background-color: #ffc312;
+>>>>>>> 3942edc5bc195fd83c21caf2d374a6c7c104c8fb
+  width: 100px;
+}
+
+.login_btn:hover {
+  color: black;
+  background-color: white;
+}
+
+.links {
+  color: white;
+}
+
+.links a {
+<<<<<<< HEAD
+  color: #FFC312;
+  margin-left: 4px;
+}
+=======
+  margin-left: 4px;
+  color: #ffc312;
+}
+>>>>>>> 3942edc5bc195fd83c21caf2d374a6c7c104c8fb

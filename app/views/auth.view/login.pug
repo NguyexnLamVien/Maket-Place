@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  section.bg-light
+    .container.mt-2
+      h1.text-center SIGN UP
+      form(action="/auth/signin" method="POST")
+        .row
+          .col-12
+            .form-group
+              label(for='userName') user name
+              input#userName.form-control(type='text' name='userName' placeholder='Input your user name')
+          .col-12
+            .form-group
+              label(for='password') Password
+              input#password.form-control(type='password' name='password' placeholder='Input your password')
+          .col-12.mt-3
+            button.btn.btn-primary.w-100(type="submit") Login

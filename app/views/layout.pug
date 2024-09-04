@@ -1,0 +1,68 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet" href="/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css")
+    link(rel="stylesheet" href="/stylesheets/style.css")
+    style.
+      html, body {
+        height: 100%;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+      #app {
+        flex: 1 0 auto;
+      }
+      .footer-section {
+        flex-shrink: 0;
+      }
+  body
+    nav.custom-navbar.navbar.navbar.navbar-expand-md.navbar-dark.bg-dark(arial-label='Furni navigation bar')
+        .container
+          a.navbar-brand(href='/')
+            | Book
+            span .
+          | &#x9;&#x9;&#x9;&#x9;
+          button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarsFurni', aria-controls='navbarsFurni', aria-expanded='false', aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          | &#x9;&#x9;&#x9;&#x9;
+          #navbars.collapse.navbar-collapse
+            ul.custom-navbar-nav.navbar-nav.ms-auto.mb-2.mb-md-0
+              li.nav-item.active
+                a.nav-link(href='/') Home
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a.nav-link(href='/users') user
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a.nav-link(href='/auth/signup') sign up
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a.nav-link(href='/auth/signin') sign in
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+    #app
+        block content
+    footer.footer-section
+      .container.relative
+        .border-top.copyright
+          .row.pt-4
+            .col-lg-6
+              p.mb-2.text-center.text-lg-start
+                | Copyright &copy;
+                script.
+                  document.write(new Date().getFullYear());
+                | . All Rights Reserved. &mdash;
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            .col-lg-6.text-center.text-lg-end
+              ul.list-unstyled.d-inline-flex.ms-auto
+                li.me-4
+                  a(href='#') Terms &amp; Conditions
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li
+                  a(href='#') Privacy Policy
+
+    script(type="text/javascript" src="/js/bootstrap.min.js")
+    script(type="text/javascript" src="/js/jquery.min.js")
