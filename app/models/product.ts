@@ -8,7 +8,7 @@ import { orderdetail } from "./orderdetail";
 import { user } from "./user";
 
 export interface ProductAttributes {
-  productId?: number;
+  id: number;
   productName?: string;
   description?: string;
   infor?: string;
@@ -22,10 +22,10 @@ export interface ProductAttributes {
 }
 
 export interface ProductInstance {
+  id:number
   createdAt: Date;
   updatedAt: Date;
 
-  productId: number;
   productName: string;
   description: string;
   infor: string;
@@ -39,7 +39,6 @@ export interface ProductInstance {
 }
 
 export const product = sequelize.define("product", {
-  productId: Sequelize.INTEGER,
   productName: Sequelize.STRING,
   description: Sequelize.STRING,
   infor: Sequelize.STRING,
@@ -53,16 +52,24 @@ export const product = sequelize.define("product", {
 });
 
 export const associate = () => {
-  product.hasMany(comment);
+  product.hasMany(comment,{
+    foreignKey:"productId"
+  });
   product.belongsTo(category);
-  product.hasMany(image);
+  product.hasMany(image,{
+    foreignKey: "productId"
+  });
   product.belongsTo(user);
-  product.hasMany(cart);
+  product.hasMany(cart,{
+    foreignKey: "productId"
+  });
   product.belongsToMany(user, {
     through: cart,
     as: "cartUsers",
   });
-  product.hasMany(orderdetail);
+  product.hasMany(orderdetail,{
+    foreignKey: "productId"
+  });
 };
 
 export default {
