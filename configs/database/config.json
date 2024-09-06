@@ -1,6 +1,9 @@
 {
   "development": {
-    "dialect": "sqlite",
-    "storage": "./db/schema/bookstore.db"
+    "username": "root",
+    "password": "",
+    "database": "datamaketplace",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   }
 }

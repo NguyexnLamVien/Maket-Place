@@ -1,41 +1,16 @@
 import { QueryInterface, SequelizeStatic } from "sequelize";
 
-export = {
+export default {
   up: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
-    return queryInterface.createTable("users", {
-      id: {
+    return queryInterface.createTable("categories", {
+      cagegoryId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
 
-      fullName: {
-        type: Sequelize.STRING,
-        validate: {
-          len: [3, 25],
-        },
-      },
-
-      userName: {
-        type: Sequelize.STRING,
-        validate: {
-          len: [3, 12],
-        },
-      },
-
-      email: {
-        type: Sequelize.STRING,
-        validate: {
-          isEmail: true,
-        },
-      },
-
-      iam_role: {
-        type: Sequelize.INTEGER,
-      },
-
-      hash_pwd: {
+      categoryName: {
         type: Sequelize.STRING,
       },
 
@@ -52,6 +27,6 @@ export = {
   },
 
   down: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
-    return queryInterface.dropTable("users");
+    return queryInterface.dropTable("categories");
   },
 };

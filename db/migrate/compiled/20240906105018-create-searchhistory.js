@@ -1,35 +1,18 @@
 "use strict";
-module.exports = {
+exports.__esModule = true;
+exports["default"] = {
     up: function (queryInterface, Sequelize) {
-        return queryInterface.createTable("users", {
+        return queryInterface.createTable('searchhistories', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            fullName: {
-                type: Sequelize.STRING,
-                validate: {
-                    len: [3, 25]
-                }
-            },
-            userName: {
-                type: Sequelize.STRING,
-                validate: {
-                    len: [3, 12]
-                }
-            },
-            email: {
-                type: Sequelize.STRING,
-                validate: {
-                    isEmail: true
-                }
-            },
-            iam_role: {
+            userId: {
                 type: Sequelize.INTEGER
             },
-            hash_pwd: {
+            content: {
                 type: Sequelize.STRING
             },
             createdAt: {
@@ -43,6 +26,6 @@ module.exports = {
         });
     },
     down: function (queryInterface, Sequelize) {
-        return queryInterface.dropTable("users");
+        return queryInterface.dropTable('searchhistories');
     }
 };
