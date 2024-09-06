@@ -6,7 +6,7 @@ import { promontion } from "./promontion";
 import { user } from "./user";
 
 export interface OrderAttributes {
-  orderId?: number;
+  id: number;
   recipientName?: string;
   recipientAddress?: string;
   recipientNumberPhone?: string;
@@ -16,10 +16,10 @@ export interface OrderAttributes {
 }
 
 export interface OrderInstance {
+  id:number;
   createdAt: Date;
   updatedAt: Date;
 
-  orderId: number;
   recipientName: string;
   recipientAddress: string;
   recipientNumberPhone: string;
@@ -29,7 +29,6 @@ export interface OrderInstance {
 }
 
 export const order = sequelize.define("order", {
-  orderId: Sequelize.INTEGER,
   recipientName: Sequelize.STRING,
   recipientAddress: Sequelize.STRING,
   recipientNumberPhone: Sequelize.STRING,
@@ -40,7 +39,9 @@ export const order = sequelize.define("order", {
 
 export const associate = () => {
   order.belongsTo(user);
-  order.hasMany(orderdetail);
+  order.hasMany(orderdetail,{
+    foreignKey: "orderId"
+  });
   order.belongsToMany(product, {
     through: orderdetail,
     as: "productOrderdetail",
