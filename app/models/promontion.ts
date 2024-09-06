@@ -3,7 +3,7 @@ import { Sequelize } from "sequelize";
 import { order } from "./order";
 
 export interface PromontionAttributes {
-  promontionCode?: number;
+  id: number;
   value?: number;
   dateEffective?: Date;
   dateExpire?: Date;
@@ -11,10 +11,10 @@ export interface PromontionAttributes {
 }
 
 export interface PromontionInstance {
+  id:number;
   createdAt: Date;
   updatedAt: Date;
 
-  promontionCode: number;
   value: number;
   dateEffective: Date;
   dateExpire: Date;
@@ -22,7 +22,6 @@ export interface PromontionInstance {
 }
 
 export const promontion = sequelize.define("promontion", {
-  promontionCode: Sequelize.INTEGER,
   value: Sequelize.DOUBLE,
   dateEffective: Sequelize.DATE,
   dateExpire: Sequelize.DATE,
