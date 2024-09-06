@@ -8,7 +8,7 @@ import { role } from "./role";
 import { searchhistory } from "./searchhistory";
 
 export interface UserAttributes {
-  userId?: number;
+  id: number;
   fullName?: string;
   birthday?: Date;
   address?: string;
@@ -18,10 +18,10 @@ export interface UserAttributes {
 }
 
 export interface UserInstance {
+  id: number;
   createdAt: Date;
   updatedAt: Date;
 
-  userId: number;
   fullName: string;
   birthday: Date;
   address: string;
@@ -31,7 +31,6 @@ export interface UserInstance {
 }
 
 export const user = sequelize.define("user", {
-  userId: Sequelize.INTEGER,
   fullName: Sequelize.STRING,
   birthday: Sequelize.DATE,
   address: Sequelize.STRING,
