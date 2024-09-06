@@ -1,47 +1,52 @@
-import {
-    QueryInterface,
-    SequelizeStatic
-} from 'sequelize';
+import { QueryInterface, SequelizeStatic } from "sequelize";
 
 export default {
-    up: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
-        return queryInterface.createTable('orderdetails', {
-            id: {
-                allowNull: false,
-                autoIncrement: true,
-                primaryKey: true,
-                type: Sequelize.INTEGER
-            },
+  up: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
+    return queryInterface.createTable("orders", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
 
-            productId: {
-                type: Sequelize.INTEGER
-            },
+      recipientName: {
+        type: Sequelize.STRING,
+      },
 
-            quantity: {
-                type: Sequelize.INTEGER
-            },
+      recipientAddress: {
+        type: Sequelize.STRING,
+      },
 
-            unitPrice: {
-                type: Sequelize.DOUBLE
-            },
+      recipientNumberPhone: {
+        type: Sequelize.STRING,
+      },
 
-            orderId: {
-                type: Sequelize.INTEGER
-            },
+      status: {
+        type: Sequelize.INTEGER,
+      },
 
-            createdAt: {
-                allowNull: false,
-                type: Sequelize.DATE
-            },
+      promontionCode: {
+        type: Sequelize.STRING,
+      },
 
-            updatedAt: {
-                allowNull: false,
-                type: Sequelize.DATE
-            }
-        });
-    },
+      userId: {
+        type: Sequelize.INTEGER,
+      },
 
-    down: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
-        return queryInterface.dropTable('orderdetails');
-    }
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
+  },
+
+  down: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
+    return queryInterface.dropTable("orders");
+  },
 };
