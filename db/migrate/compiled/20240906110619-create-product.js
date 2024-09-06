@@ -3,7 +3,7 @@ exports.__esModule = true;
 exports["default"] = {
     up: function (queryInterface, Sequelize) {
         return queryInterface.createTable("products", {
-            productId: {
+            id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
