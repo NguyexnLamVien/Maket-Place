@@ -1,26 +1,21 @@
 "use strict";
-module.exports = {
+exports.__esModule = true;
+exports["default"] = {
     up: function (queryInterface, Sequelize) {
-        return queryInterface.createTable("books", {
-            id: {
+        return queryInterface.createTable("promontions", {
+            promontionCode: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            title: {
-                type: Sequelize.STRING,
-                validate: {
-                    len: [3, 50]
-                }
+            value: {
+                type: Sequelize.DOUBLE
             },
-            author: {
-                type: Sequelize.STRING,
-                validate: {
-                    len: [3, 30]
-                }
+            dateEffective: {
+                type: Sequelize.DATE
             },
-            publishedDate: {
+            dateExpire: {
                 type: Sequelize.DATE
             },
             userId: {
@@ -37,6 +32,6 @@ module.exports = {
         });
     },
     down: function (queryInterface, Sequelize) {
-        return queryInterface.dropTable("Books");
+        return queryInterface.dropTable("promontions");
     }
 };

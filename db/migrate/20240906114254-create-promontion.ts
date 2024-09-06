@@ -1,30 +1,24 @@
 import { QueryInterface, SequelizeStatic } from "sequelize";
 
-export = {
+export default {
   up: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
-    return queryInterface.createTable("books", {
-      id: {
+    return queryInterface.createTable("promontions", {
+      promontionCode: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
 
-      title: {
-        type: Sequelize.STRING,
-        validate: {
-          len: [3, 50],
-        },
+      value: {
+        type: Sequelize.DOUBLE,
       },
 
-      author: {
-        type: Sequelize.STRING,
-        validate: {
-          len: [3, 30],
-        },
+      dateEffective: {
+        type: Sequelize.DATE,
       },
 
-      publishedDate: {
+      dateExpire: {
         type: Sequelize.DATE,
       },
 
@@ -45,6 +39,6 @@ export = {
   },
 
   down: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
-    return queryInterface.dropTable("Books");
+    return queryInterface.dropTable("promontions");
   },
 };
