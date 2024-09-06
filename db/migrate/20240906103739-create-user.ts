@@ -3,7 +3,7 @@ import { QueryInterface, SequelizeStatic } from "sequelize";
 export default {
   up: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
     return queryInterface.createTable("users", {
-      userId: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -29,7 +29,11 @@ export default {
       email: {
         type: Sequelize.STRING,
       },
-
+      
+      password:{
+        type: Sequelize.STRING,
+      },
+      
       avatar: {
         type: Sequelize.BLOB,
       },
