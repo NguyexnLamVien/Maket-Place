@@ -3,7 +3,7 @@ exports.__esModule = true;
 exports["default"] = {
     up: function (queryInterface, Sequelize) {
         return queryInterface.createTable("categories", {
-            cagegoryId: {
+            id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
