@@ -1,52 +1,47 @@
-import { QueryInterface, SequelizeStatic } from "sequelize";
+import {
+    QueryInterface,
+    SequelizeStatic
+} from 'sequelize';
 
 export default {
-  up: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
-    return queryInterface.createTable("orders", {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
+    up: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
+        return queryInterface.createTable('orderdetails', {
+            id: {
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true,
+                type: Sequelize.INTEGER
+            },
 
-      recipientName: {
-        type: Sequelize.STRING,
-      },
+            productId: {
+                type: Sequelize.INTEGER
+            },
 
-      recipientAddress: {
-        type: Sequelize.STRING,
-      },
+            quantity: {
+                type: Sequelize.INTEGER
+            },
 
-      recipientNumberPhone: {
-        type: Sequelize.STRING,
-      },
+            unitPrice: {
+                type: Sequelize.DOUBLE
+            },
 
-      status: {
-        type: Sequelize.INTEGER,
-      },
+            orderId: {
+                type: Sequelize.INTEGER
+            },
 
-      promontionCode: {
-        type: Sequelize.STRING,
-      },
+            createdAt: {
+                allowNull: false,
+                type: Sequelize.DATE
+            },
 
-      userId: {
-        type: Sequelize.INTEGER,
-      },
+            updatedAt: {
+                allowNull: false,
+                type: Sequelize.DATE
+            }
+        });
+    },
 
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-    });
-  },
-
-  down: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
-    return queryInterface.dropTable("orders");
-  },
+    down: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
+        return queryInterface.dropTable('orderdetails');
+    }
 };
