@@ -19,7 +19,9 @@ export const category = sequelize.define("category", {
 });
 
 export const associate = () => {
-  category.hasMany(product);
+  category.hasMany(product,{
+    foreignKey:"categoryId"
+  });
 };
 
 export default {
