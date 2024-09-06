@@ -3,7 +3,7 @@ import { QueryInterface, SequelizeStatic } from "sequelize";
 export default {
   up: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
     return queryInterface.createTable("products", {
-      productId: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
