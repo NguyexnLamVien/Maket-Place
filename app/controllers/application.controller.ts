@@ -1,20 +1,19 @@
 import models from "@models";
 import { NextFunction, Request, Response } from "express";
-import { Role } from "../models/user";
 
 export class ApplicationController {
   public async validateSignUp(req: Request, res: Response, next: NextFunction) {
-    const { username, email } = req.body;
+    const { numberPhone, email } = req.body;
 
     const existingUser = await models.user.findOne({
       where: {
-        $or: [{ username }, { email }],
+        $or: [{ numberPhone }, { email }],
       },
     });
 
     if (existingUser) {
       return res.status(400).json({
-        message: "Cannot sign-up with the username or email already existed",
+        message: "Cannot sign-up with the numberPhone or email already existed",
       });
     }
     next();

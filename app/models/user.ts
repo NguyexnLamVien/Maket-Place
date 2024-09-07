@@ -14,6 +14,7 @@ export interface UserAttributes {
   address?: string;
   numberPhone?: string;
   email?: string;
+  password?: string;
   avatar?: string;
 }
 
@@ -27,6 +28,7 @@ export interface UserInstance {
   address: string;
   numberPhone: string;
   email: string;
+  password: string;
   avatar: string;
 }
 
@@ -36,20 +38,31 @@ export const user = sequelize.define("user", {
   address: Sequelize.STRING,
   numberPhone: Sequelize.STRING,
   email: Sequelize.STRING,
+  password: Sequelize.STRING,
   avatar: Sequelize.BLOB,
 });
 
 export const associate = () => {
-  user.hasMany(role);
-  user.hasMany(searchhistory);
-  user.hasMany(comment);
-  user.hasMany(product);
+  user.hasMany(role, {
+    foreignKey: "userId",
+  });
+  user.hasMany(searchhistory, {
+    foreignKey: "userId",
+  });
+  user.hasMany(comment, {
+    foreignKey: "userId",
+  });
+  user.hasMany(product, {
+    foreignKey: "userId",
+  });
   product.hasMany(cart);
   user.belongsToMany(product, {
     through: cart,
     as: "cartProducts",
   });
-  user.hasMany(order);
+  user.hasMany(order, {
+    foreignKey: "userId",
+  });
 };
 
 export default {
