@@ -12,9 +12,15 @@ export class AuthRoute {
     this.path
       .route("/google/callback")
       .get(this.authController.loginWithGoogleRedirect);
+    this.path.route("/signin").get(this.authController.signin);
+    this.path.route("/signup").get(this.authController.signup);
+    this.path.route("/login").post(this.authController.login);
+    this.path
+      .route("/")
+      .post(this.authController.validateSignUp, this.authController.create);
 
     Route.resource(this.path, this.authController, {
-      only: [RestActions.Destroy, RestActions.Index, RestActions.Create],
+      only: [RestActions.Destroy],
     });
 
     return this.path;

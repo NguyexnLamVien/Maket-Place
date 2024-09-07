@@ -7,14 +7,15 @@ export class ApplicationController {
 
     const existingUser = await models.user.findOne({
       where: {
-        $or: [{ numberPhone }, { email }],
+        $or: [{ numberPhone: numberPhone.trim() }, { email: email.trim() }],
       },
     });
 
     if (existingUser) {
-      return res.status(400).json({
-        message: "Cannot sign-up with the numberPhone or email already existed",
+      req.flash("errors", {
+        msg: "User or number phone previously registered",
       });
+      return res.redirect("/auth/signup");
     }
     next();
   }

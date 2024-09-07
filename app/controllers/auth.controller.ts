@@ -1,9 +1,13 @@
 import env from "@configs/env";
 import models from "@models";
+import { Role } from "@models/role";
 import { UserInstance } from "@models/user";
 import axios from "axios";
 import { Request, Response } from "express";
+import { Op } from "sequelize";
+import * as yup from "yup";
 import { ApplicationController } from ".";
+const bcrypt = require("bcrypt");
 
 export class AuthController extends ApplicationController {
   public async loginWithGoogle(req: Request, res: Response) {
@@ -73,27 +77,86 @@ export class AuthController extends ApplicationController {
     res.redirect("/");
   }
 
-  public async index(req: Request, res: Response) {
-    res.render("auth.view/login");
+  public async signin(req: Request, res: Response) {
+    res.render("userview/auth.view/signin");
+  }
+  public async signup(req: Request, res: Response) {
+    res.render("userview/auth.view/signup");
   }
 
   public async create(req: Request, res: Response) {
-    const { email, password } = req.body;
+    const { fullName, email, numberPhone, password, confirmPassword } =
+      req.body;
 
-    const user = await models.user.findOne({
-      where: {
-        email,
-        password,
-      },
-    });
-
-    if (user) {
-      req.flash("success", { msg: "Login successfully" });
-    } else {
-      req.flash("errors", { msg: "User is not found." });
+    const data = {
+      fullName,
+      numberPhone,
+      password,
+    };
+    if (password.trim() != confirmPassword.trim()) {
+      req.flash("errors", { msg: "Confirm different password!" });
+      return res.redirect("/auth/signup");
     }
 
-    res.redirect("/");
+    const checkValSignup = yup.object({
+      fullName: yup
+        .string()
+        .trim()
+        .min(5, "Full name must be more than 5 characters.")
+        .max(50, "Full name cannot exceed 50 characters"),
+      numberPhone: yup
+        .string()
+        .trim()
+        .min(10, "Phone number has at least 10 digits")
+        .max(11, "Phone number should not exceed 10 numbers")
+        .matches(
+          /^0\d{9,10}$/,
+          "The first phone number must be 0 and the entire number must be a number"
+        ),
+      password: yup
+        .string()
+        .trim()
+        .min(6, "Password must be at least 6 characters long")
+        .max(30, "Password must be shorter than 30 characters"),
+    });
+
+    try {
+      const check = await checkValSignup.validate(data);
+
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(password, salt);
+
+      const newuser = await models.user.create({
+        numberPhone: numberPhone,
+        email: email,
+        password: hash,
+        address: null,
+        avatar: null,
+        birthday: null,
+        fullName: fullName,
+      });
+
+      const user = (await models.user.findOne({
+        where: {
+          email,
+        },
+      })) as UserInstance;
+      const addrole = await models.role.create({
+        userId: user.id,
+        value: Role.USER,
+      });
+      req.session.userId = user.id;
+      req.flash("success", { msg: "Login success!!!" });
+      res.redirect("/");
+    } catch (error) {
+      if (error instanceof yup.ValidationError) {
+        req.flash("errors", { msg: error.errors });
+        res.redirect("/auth/signup");
+      } else {
+        req.flash("errors", { msg: "Unknown error" });
+        res.redirect("/auth/signup");
+      }
+    }
   }
 
   public async destroy(req: Request, res: Response) {
@@ -103,5 +166,29 @@ export class AuthController extends ApplicationController {
         res.redirect("https://accounts.google.com/logout");
       }
     });
+  }
+
+  public async login(req: Request, res: Response) {
+    const { username, password } = req.body;
+
+    const checkUser = (await models.user.findOne({
+      where: {
+        [Op.or]: [{ email: username.trim() }, { numberPhone: username.trim() }],
+      },
+    })) as UserInstance;
+    if (!checkUser) {
+      req.flash("errors", { msg: "username is not found." });
+      res.redirect("/auth/signin");
+    } else {
+      if (await bcrypt.compare(password, checkUser.password)) {
+        req.session.userId = checkUser.id;
+
+        req.flash("success", { msg: "Login success!!!" });
+        res.redirect("/");
+      } else {
+        req.flash("errors", { msg: "Password is not found." });
+        res.redirect("/auth/signin");
+      }
+    }
   }
 }

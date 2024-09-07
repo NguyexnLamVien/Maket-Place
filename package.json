@@ -44,7 +44,8 @@
     "serverless-http": "3.2.0",
     "serverless-offline": "13.2.1",
     "sqlite3": "5.1.7",
-    "tsconfig-paths": "4.2.0"
+    "tsconfig-paths": "4.2.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
