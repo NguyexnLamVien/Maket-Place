@@ -165,7 +165,7 @@ export class AuthController extends ApplicationController {
         req.flash("errors", { msg: "Unknown error" });
         res.redirect("/");
       } else {
-        res.redirect("/"); // Redirect to the homepage after logout
+        res.redirect("/"); 
       }
     });
   }

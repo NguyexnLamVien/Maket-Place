@@ -10,18 +10,28 @@
     padding: 1em;
     border-radius: 2px;
 }
-.account, .cart{
-    background-color: #090d1430;
-    border-radius: 50%;
-    padding: .6rem;
+.dropdown-menu {
+    width: 100%;
 }
 
-.infor .logout {
-    /* display: none; */
-    position: absolute;
-    bottom: -50px;
+.dropdown-menu .dropdown-item {
+    font-size: larger;
+    padding: 1.25rem 1.5rem !important;
+    text-align: center;
 }
 
-.infor .account:hover+.logout {
-    display: block;
+.dropdown-menu .dropdown-item:active {
+    background-color: rgb(204, 153, 102);
+    color: white;
+}
+
+.dropdown-menu .logout button {
+    width: 100%;
+    background-color: #ff000000;
+    border: none;
+    z-index: 1000;
+}
+
+.user-info {
+    z-index: 100;
 }
