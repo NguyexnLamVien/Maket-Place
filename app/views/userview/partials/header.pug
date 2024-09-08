@@ -1,240 +1,39 @@
-header.header
-  .header-top
-    .container
-      .header-left
-        b BOOKSTORE
-      // End .header-left
-      .header-right
-        ul.top-menu
-          li
-            a(href='#') Links
-            ul
-              li
-                a(href='tel:#')
-                  i.icon-phone
-                  | Call: +0123 456 789
-              li
-              - if (!user)
-                li
-                  a.nav-link(href='/auth/signin') Login
-              - else
-                li
-                  a(href="/userinfors").userInfor
-                    - if(user.avatarUrl)
-                        img(style='width: 40px; height: 40px; border-radius: 50%' src=`${user.avatarUrl}`)
-                        span= user.name
-                    - else
-                        img(style='width: 40px; height: 40px; border-radius: 50%' src="https://scontent.fhan14-5.fna.fbcdn.net/v/t1.30497-1/453178253_471506465671661_2781666950760530985_n.png?stp=dst-png_s200x200&_nc_cat=1&ccb=1-7&_nc_sid=136b72&_nc_ohc=ANaUE6Y_shwQ7kNvgEDF7Bf&_nc_ht=scontent.fhan14-5.fna&oh=00_AYBuYkGVVF3ZQEo0td2RNTKwS_m0COnLcvKg1AZlZm6Q-A&oe=66F245FA")
-                        span= user.name
-        // End .top-menu
-      // End .header-right
-    // End .container
-  // End .header-top
-  .header-middle.sticky-header
-    .container
-      .header-left
-        button.mobile-menu-toggler
-          span.sr-only Toggle mobile menu
-          i.icon-bars
-        a.logo(href='/')
-          img(src='/images/logo.png' alt='Molla Logo' width='105' height='25')
-        nav.main-nav
-          ul.menu.sf-arrows
-            li.megamenu-container.active
-              a(href='/') Home
-            li
-              a.sf-with-ul(href='/prusers') Products
-              .megamenu.megamenu-md
-                .row.no-gutters
-                  .col-md-8
-                    .menu-col
-                      .row
-                        .col-md-6
-                          .menu-title Shop with sidebar
-                          // End .menu-title
-                          ul
-                            li
-                              a(href='category-list.html') Shop List
-                            li
-                              a(href='category-2cols.html') Shop Grid 2 Columns
-                            li
-                              a(href='category.html') Shop Grid 3 Columns
-                            li
-                              a(href='category-4cols.html') Shop Grid 4 Columns
-                            li
-                              a(href='category-market.html')
-                                span
-                                  | Shop Market
-                                  span.tip.tip-new New
-                          .menu-title Shop no sidebar
-                          // End .menu-title
-                          ul
-                            li
-                              a(href='category-boxed.html')
-                                span
-                                  | Shop Boxed No Sidebar
-                                  span.tip.tip-hot Hot
-                            li
-                              a(href='category-fullwidth.html') Shop Fullwidth No Sidebar
-                        // End .col-md-6
-                        .col-md-6
-                          .menu-title Product Category
-                          // End .menu-title
-                          ul
-                            li
-                              a(href='product-category-boxed.html') Product Category Boxed
-                            li
-                              a(href='product-category-fullwidth.html')
-                                span
-                                  | Product Category Fullwidth
-                                  span.tip.tip-new New
-                          .menu-title Shop Pages
-                          // End .menu-title
-                          ul
-                            li
-                              a(href='cart.html') Cart
-                            li
-                              a(href='checkout.html') Checkout
-                            li
-                              a(href='wishlist.html') Wishlist
-                            li
-                              a(href='dashboard.html') My Account
-                            li
-                              a(href='#') Lookbook
-                        // End .col-md-6
-                      // End .row
-                    // End .menu-col
-                  // End .col-md-8
-                  .col-md-4
-                    .banner.banner-overlay
-                      a.banner.banner-menu(href='category.html')
-                        img(src='images/menu/banner-1.jpg' alt='Banner')
-                        .banner-content.banner-content-top
-                          .banner-title.text-white
-                            | Last 
-                            br
-                            | Chance
-                            br
-                            span
-                              strong Sale
-                          // End .banner-title
-                        // End .banner-content
-                    // End .banner banner-overlay
-                  // End .col-md-4
-                // End .row
-              // End .megamenu megamenu-md
-            li
-              a(href='about.html') About
-            li
-              a(href='contact.html') Contact
-            li
-              a.sf-with-ul(href='blog.html') Blog
-              ul
-                li
-                  a(href='blog.html') Classic
-                li
-                  a(href='blog-listing.html') Listing
-                li
-                  a(href='#') Grid
-                  ul
-                    li
-                      a(href='blog-grid-2cols.html') Grid 2 columns
-                    li
-                      a(href='blog-grid-3cols.html') Grid 3 columns
-                    li
-                      a(href='blog-grid-4cols.html') Grid 4 columns
-                    li
-                      a(href='blog-grid-sidebar.html') Grid sidebar
-                li
-                  a(href='#') Masonry
-                  ul
-                    li
-                      a(href='blog-masonry-2cols.html') Masonry 2 columns
-                    li
-                      a(href='blog-masonry-3cols.html') Masonry 3 columns
-                    li
-                      a(href='blog-masonry-4cols.html') Masonry 4 columns
-                    li
-                      a(href='blog-masonry-sidebar.html') Masonry sidebar
-                li
-                  a(href='#') Mask
-                  ul
-                    li
-                      a(href='blog-mask-grid.html') Blog mask grid
-                    li
-                      a(href='blog-mask-masonry.html') Blog mask masonry
-                li
-                  a(href='#') Single Post
-                  ul
-                    li
-                      a(href='single.html') Default with sidebar
-                    li
-                      a(href='single-fullwidth.html') Fullwidth no sidebar
-                    li
-                      a(href='single-fullwidth-sidebar.html') Fullwidth with sidebar
-            li
-              a(href='faq.html') F.A.Q
-          // End .menu
-        // End .main-nav
-      // End .header-left
-      .header-right
-        .header-search
-          a.search-toggle(href='#' role='button' title='Search')
-            i.icon-search
-          form(action='#' method='get')
-            .header-search-wrapper
-              label.sr-only(for='q') Search
-              input#q.form-control(type='search' name='q' placeholder='Search in...' required='')
-            // End .header-search-wrapper
-        // End .header-search
-        .dropdown.cart-dropdown
-          a.dropdown-toggle(href='/carts' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' data-display='static')
-            i.icon-shopping-cart
-            span.cart-count 2
-          .dropdown-menu.dropdown-menu-right
-            .dropdown-cart-products
-              .product
-                .product-cart-details
-                  h4.product-title
-                    a(href='product.html') Beige knitted elastic runner shoes
-                  span.cart-product-info
-                    span.cart-product-qty 1
-                    |                                                 x $84.00
-                // End .product-cart-details
-                figure.product-image-container
-                  a.product-image(href='product.html')
-                    img(src='/images/products/cart/product-1.jpg' alt='product')
-                a.btn-remove(href='#' title='Remove Product')
-                  i.icon-close
-              // End .product
-              .product
-                .product-cart-details
-                  h4.product-title
-                    a(href='product.html') Blue utility pinafore denim dress
-                  span.cart-product-info
-                    span.cart-product-qty 1
-                    |                                                 x $76.00
-                // End .product-cart-details
-                figure.product-image-container
-                  a.product-image(href='product.html')
-                    img(src='/images/products/cart/product-2.jpg' alt='product')
-                a.btn-remove(href='#' title='Remove Product')
-                  i.icon-close
-              // End .product
-            // End .cart-product
-            .dropdown-cart-total
-              span Total
-              span.cart-total-price $160.00
-            // End .dropdown-cart-total
-            .dropdown-cart-action
-              a.btn.btn-primary(href='/carts') View Cart
-              a.btn.btn-outline-primary-2(href='checkout.html')
-                span Checkout
-                i.icon-long-arrow-right
-            // End .dropdown-cart-total
-          // End .dropdown-menu
-        // End .cart-dropdown
-      // End .header-right
-    // End .container
-  // End .header-middle
-// End .header
+header.header.header-14.border-bottom-0
+  .header-middle
+    .container-fluid
+      .row.align-items-center
+        .col-auto.col-lg-3.col-xl-3.col-xxl-2
+          a.logo(href='index.html')
+            img(src='images/demos/demo-14/logo.png' alt='Logo Molla' width='105' height='25')
+        .col.col-lg-9.col-xl-9.col-xxl-10.header-middle-right
+          .row.align-items-center
+            .col-lg-8.col-xxl-4-5col
+              .header-search.header-search-extended.header-search-visible.header-search-no-radius
+                a.search-toggle(href='#' role='button')
+                  i.icon-search
+                form.d-none.d-lg-block(action='#' method='get')
+                  .header-search-wrapper.search-wrapper-wide
+                    label.sr-only(for='q') T&igrave;m ki&#x1EBF;m
+                    input#q.form-control(type='search' name='q' placeholder='Tìm kiếm sản phẩm ...' required='')
+                    button.btn.btn-primary(type='submit')
+                      i.icon-search
+            .col-lg-3.col-6.d-flex.justify-content-end.align-items-center.infor
+              - if(user)
+                .account
+                  a.header-icon(href='#signin-modal')
+                    svg.bi.bi-person-fill(xmlns='http://www.w3.org/2000/svg' width='30' height='30' fill='currentColor' viewbox='0 0 16 16')
+                      path(d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6')
+                ul.logout 
+                  li 
+                    form(action=`/auth/${user.id}?_method=DELETE`, method="post") 
+                     button(type="submit" vlue="logout") logout
+              - else 
+                .account
+                  a.header-icon(href="/auth/signin")
+                    svg.bi.bi-person-fill(xmlns='http://www.w3.org/2000/svg' width='30' height='30' fill='currentColor' viewbox='0 0 16 16')
+                      path(d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6')
+            .col-lg-1.col-6.d-flex.justify-content-end.align-items-center
+              .cart
+                a(href='#')
+                  svg.bi.bi-cart(xmlns='http://www.w3.org/2000/svg' width='30' height='30' fill='currentColor' viewbox='0 0 16 16')
+                    path(d='M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2')

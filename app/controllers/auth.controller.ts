@@ -160,10 +160,12 @@ export class AuthController extends ApplicationController {
   }
 
   public async destroy(req: Request, res: Response) {
-    req.session.destroy((err: Error) => {
-      if (err) console.log(err);
-      else {
-        res.redirect("https://accounts.google.com/logout");
+    req.session.destroy((err) => {
+      if (err) {
+        req.flash("errors", { msg: "Unknown error" });
+        res.redirect("/");
+      } else {
+        res.redirect("/"); // Redirect to the homepage after logout
       }
     });
   }
