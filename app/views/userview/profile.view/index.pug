@@ -1,0 +1,95 @@
+extends ../layout2
+
+block content
+  .page-wrapper
+    include ../partials/header
+    main
+      .my-5
+      .container.pd
+        #layoutSidenav.rounded-3.overflow-hidden
+          #layoutSidenav_nav
+            nav#sidenavAccordion.sb-sidenav.accordion.sb-sidenav-dark.border.rounded.shadow-sm(style='font-size: 1.8rem;')
+              .sb-sidenav-menu
+                .nav
+                  a.nav-link.active(href='/profile')
+                    .sb-nav-link-icon.active
+                      i.fas.fa-user.fa-fw
+                    |                                         Thông tin tài khoản
+                  a.nav-link(href='/history.html')
+                    .sb-nav-link-icon
+                      i.fas.fa-shopping-cart.fa-fw
+                    |                                         Đơn hàng
+                  a.nav-link(href='/seller')
+                    .sb-nav-link-icon
+                      i.fas.fa-store.fa-fw
+                    |                                         Kênh người bán
+          #layoutSidenav_content
+            main
+              .container-fluid.px-4
+                .border.p-4.mb-4.rounded.shadow-lg.bg-white
+                  .border-bottom.pb-3.mb-4.text-center
+                    h1.h3.mb-1.text-primary Hồ sơ của tôi
+                    p.text-muted.mb-0 Quản lí thông tin
+                  .row.g-4
+                    .col-md-8
+                      .border.rounded-3.p-4.bg-white.shadow-sm
+                        form
+                          .mb-4.row.align-items-center
+                            label.col-sm-3.col-form-label.fw-bold(for='name') Tên :
+                            .col-sm-9
+                              - if(user.fullName)
+                                  input#name.form-control(type='text' name='fullName' value=`${user.fullName}`)
+                              - else
+                                  input#name.form-control(type='text'  name='fullName' value=`` placeholder="Chưa chưa cập nhật tên người dùng")
+                          .mb-4.row.align-items-center
+                            label.col-sm-3.col-form-label.fw-bold(for='phone') Số điện thoại :
+                            .col-sm-9
+                              - if(user.numberPhone)
+                                  input#name.form-control(type='text' name='numberPhone' value=`${user.numberPhone}`)
+                              - else
+                                  input#name.form-control(type='text' name='numberPhone' value=`` placeholder="Chưa cập nhật số điện thoại")
+                          .mb-4.row.align-items-center
+                            label.col-sm-3.col-form-label.fw-bold(for='email') Email:
+                            .col-sm-9
+                              - if(user.email)
+                                  input#name.form-control(type='text' name='email' value=`${user.email}`)
+                              - else
+                                  input#name.form-control(type='text' name='email' value=`` placeholder="Chưa cập nhật email")
+                          .mb-4.row.align-items-center
+                            label.col-sm-3.col-form-label.fw-bold(for='email') Địa chỉ:
+                            .col-sm-9
+                              - if(user.address)
+                                  input#name.form-control(type='text' name='address' value=`${user.address}`)
+                              - else
+                                  input#name.form-control(type='text' name='address' value=`` placeholder="Chưa cập nhật địa chỉ")
+                          .mb-4.row.align-items-center
+                            label.col-sm-3.col-form-label.fw-bold(for='birthday') Ngày sinh
+                            .col-sm-9.d-flex
+                              - if(user.birthday&& user.birthday!=null)
+                                  input#birthday.form-control.ml-3.mr-3(type='number' min="1" max="31" name='day' value='day')
+                                  input#birthday.form-control.ml-3.mr-3(type='number' min="1" max="12" name='month' value='month')
+                                  input#birthday.form-control.ml-3.mr-3(type='number' min="1960" max="2024" name='year' value='year')
+                              - else 
+                                  input#birthday.form-control.ml-3.mr-3(type='number' min="1" max="31" name='day' value='1')
+                                  input#birthday.form-control.ml-3.mr-3(type='number' min="1" max="12" name='month' value='1')
+                                  input#birthday.form-control.ml-3.mr-3(type='number' min="1960" max="2024" name='year' value='2024')
+                          .text-center
+                            button.btn.btn-primary.px-4.me-2.rounded-pill(type='button')
+                              i.fas.fa-edit.me-2
+                              | Lưu thông tin
+                            button.btn.btn-outline-secondary.px-4.rounded-pill(type='button')
+                              i.fas.fa-key.me-2
+                              | Đổi mật khẩu
+                    .col-md-4.d-flex.justify-content-center.align-items-center
+                      .border.rounded-3.p-4.bg-white.shadow-sm.text-center
+                        - if(user.avatar)
+                            img#avatar.img-thumbnail.rounded-circle.mb-3.shadow.mx-auto.d-block(src=`data:image/png;base64,${user.avatar.toString('base64')}` alt='Ảnh đại diện' style='width: 150px; height: 150px; object-fit: cover;')
+                        - else
+                            img#avatar.img-thumbnail.rounded-circle.mb-3.shadow.mx-auto.d-block(src='images/avatar_user_null.png' alt='Avatar' style='width: 150px; height: 150px; object-fit: cover;')
+                        div
+                          label.btn.btn-outline-primary.rounded-pill(for='uploadAvatar')
+                            i.fas.fa-camera.me-2
+                            | Ch&#x1ECD;n &#x1EA3;nh
+                            input#uploadAvatar.d-none(type='file' name='uploadAvatar')
+
+    include ../partials/footer

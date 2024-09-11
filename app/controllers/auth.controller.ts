@@ -145,7 +145,9 @@ export class AuthController extends ApplicationController {
         userId: user.id,
         value: Role.USER,
       });
+      // req.session.userId = user.id;
       req.session.userId = user.id;
+
       req.flash("success", { msg: "Login success!!!" });
       res.redirect("/");
     } catch (error) {
