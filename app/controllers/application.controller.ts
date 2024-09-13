@@ -1,13 +1,15 @@
-import models from "@models";
+import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
+
+const prisma = new PrismaClient();
 
 export class ApplicationController {
   public async validateSignUp(req: Request, res: Response, next: NextFunction) {
     const { numberPhone, email } = req.body;
 
-    const existingUser = await models.user.findOne({
+    const existingUser = await prisma.user.findFirst({
       where: {
-        $or: [{ numberPhone: numberPhone.trim() }, { email: email.trim() }],
+        OR: [{ numberPhone: numberPhone.trim() }, { email: email.trim() }],
       },
     });
 

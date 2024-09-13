@@ -1,12 +1,15 @@
-import models from "@models";
+import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import { ApplicationController } from ".";
 
+const prisma = new PrismaClient();
 export class ProfileController extends ApplicationController {
   public async index(req: Request, res: Response) {
-    // const user = await models.user.findById(req.session.userId);
-    req.session.userId = 8;
-    const user = await models.user.findById(req.session.userId);
+    const user = await prisma.user.findFirst({
+      where: {
+        id: req.session.userId,
+      },
+    });
 
     if (user) {
       res.render("userview/profile.view/index", { user });

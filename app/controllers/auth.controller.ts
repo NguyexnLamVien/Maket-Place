@@ -1,12 +1,12 @@
 import env from "@configs/env";
-import models from "@models";
-import { Role } from "@models/role";
-import { UserInstance } from "@models/user";
+import { PrismaClient } from "@prisma/client";
 import axios from "axios";
 import { Request, Response } from "express";
 import { Op } from "sequelize";
 import * as yup from "yup";
 import { ApplicationController } from ".";
+
+const prisma = new PrismaClient();
 const bcrypt = require("bcrypt");
 
 export class AuthController extends ApplicationController {
@@ -37,37 +37,37 @@ export class AuthController extends ApplicationController {
       }
     );
 
-    const loginUser = (await models.user.findOne({
+    const loginUser = await prisma.user.findFirst({
       where: {
         email: googleUser.email,
       },
-    })) as UserInstance;
+    });
 
     if (!loginUser) {
-      const newUser = (await models.user.create({
-        fullName: googleUser.name,
-        birthday: googleUser.birthday,
-        address: googleUser.address,
-        numberPhone: googleUser.numberPhone,
-        email: googleUser.email,
-        password: null,
-        avatar: googleUser.picture,
-      })) as UserInstance;
+      const newUser = await prisma.user.create({
+        data: {
+          fullName: googleUser.name,
+          birthday: googleUser.birthday,
+          address: googleUser.address,
+          numberPhone: googleUser.numberPhone,
+          email: googleUser.email,
+          password: null,
+          avatar: googleUser.picture,
+        },
+      });
 
       req.session.userId = newUser.id;
     } else {
-      await models.user.update(
-        {
-          name: googleUser.name,
-          email: googleUser.email,
-          avatarUrl: googleUser.picture,
+      await prisma.user.update({
+        where: {
+          id: loginUser.id,
         },
-        {
-          where: {
-            id: loginUser.id,
-          },
-        }
-      );
+        data: {
+          fullName: googleUser.name,
+          email: googleUser.email,
+          avatar: googleUser.picture,
+        },
+      });
 
       req.session.userId = loginUser.id;
     }
@@ -126,30 +126,34 @@ export class AuthController extends ApplicationController {
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
 
-      const newuser = await models.user.create({
-        numberPhone: numberPhone,
-        email: email,
-        password: hash,
-        address: null,
-        avatar: null,
-        birthday: null,
-        fullName: fullName,
-      });
-
-      const user = (await models.user.findOne({
-        where: {
-          email,
+      const newUser = await prisma.user.create({
+        data: {
+          numberPhone: numberPhone,
+          email: email,
+          password: hash,
+          address: null,
+          avatar: null,
+          birthday: null,
+          fullName: fullName,
         },
-      })) as UserInstance;
-      const addrole = await models.role.create({
-        userId: user.id,
-        value: Role.USER,
       });
-      // req.session.userId = user.id;
-      req.session.userId = user.id;
-
-      req.flash("success", { msg: "Login success!!!" });
-      res.redirect("/");
+      if (newUser) {
+        const user = await prisma.user.findFirst({
+          where: {
+            email: email,
+          },
+        });
+        if (user) {
+          const addrole = await prisma.roleUser.create({
+            data: {
+              userId: user.id,
+              rolesId: 2,
+            },
+          });
+        }
+        req.flash("success", { msg: "Đăng nhập thành công" });
+        res.redirect("/");
+      }
     } catch (error) {
       if (error instanceof yup.ValidationError) {
         req.flash("errors", { msg: error.errors });
@@ -161,25 +165,14 @@ export class AuthController extends ApplicationController {
     }
   }
 
-  public async destroy(req: Request, res: Response) {
-    req.session.destroy((err) => {
-      if (err) {
-        req.flash("errors", { msg: "Unknown error" });
-        res.redirect("/");
-      } else {
-        res.redirect("/"); 
-      }
-    });
-  }
-
   public async login(req: Request, res: Response) {
     const { username, password } = req.body;
 
-    const checkUser = (await models.user.findOne({
+    const checkUser = await prisma.user.findFirst({
       where: {
         [Op.or]: [{ email: username.trim() }, { numberPhone: username.trim() }],
       },
-    })) as UserInstance;
+    });
     if (!checkUser) {
       req.flash("errors", { msg: "username is not found." });
       res.redirect("/auth/signin");
@@ -195,4 +188,16 @@ export class AuthController extends ApplicationController {
       }
     }
   }
+
+  public async destroy(req: Request, res: Response) {
+    req.session.destroy((err) => {
+      if (err) {
+        req.flash("errors", { msg: "Unknown error" });
+        res.redirect("/");
+      } else {
+        res.redirect("/");
+      }
+    });
+  }
 }
+
